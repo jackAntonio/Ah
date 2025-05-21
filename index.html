@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inscription</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+   
+   <form method="POST" action="register.php" id="registerForm" enctype="multipart/form-data">
+  <h2>Inscription</h2>
+  <input type="file" name="photo" accept="image/*" required>
+  <input type="text" name="nom" placeholder="Nom" required>
+  <input type="text" name="prenom" placeholder="Prénom" required>
+  <input type="email" name="email" placeholder="Email" required>
+  <select name="sexe" required>
+      <option value="">Sexe</option>
+      <option value="Homme">Homme</option>
+      <option value="Femme">Femme</option>
+  </select>
+  <input type="text" name="contact" placeholder="Contact" required>
+  <input type="date" name="date_naissance" required>
+  <input type="text" name="adresse" placeholder="Adresse" required>
+  <input type="password" name="password" placeholder="Mot de passe" required>
+  <button type="submit">S'inscrire</button>
+ </button>
+      <p>Déjà inscrit ? <a href="login.php">Se connecter</a></p>
+    </form>
+    <button id="themeToggle">Changer de thème</button>
+    
+  </div>
+  <div id="successModal" class="modal">
+  <div class="modal-content">
+    <h3>🎉 Félicitations !</h3>
+    <p>Vous avez réussi la première étape de l'inscription.</p>
+    <button id="closeModal">Continuer</button>
+  </div>
+</div>
+
+<script>
+document.getElementById("themeToggle").addEventListener("click", () => {
+  document.body.classList.toggle("dark");
+});
+
+document.getElementById("registerForm").addEventListener("submit", function (e) {
+  const button = this.querySelector("button");
+  button.classList.add("loading");
+});
+
+// Modale d'inscription réussie
+const urlParams = new URLSearchParams(window.location.search);
+if (urlParams.get("registered") === "true") {
+  document.getElementById("successModal").style.display = "flex";
+}
+
+document.getElementById("closeModal").addEventListener("click", function () {
+  document.getElementById("successModal").style.display = "none";
+  window.location.href = "verify.php";
+});
+</script>
+
+</body>
+</html>
